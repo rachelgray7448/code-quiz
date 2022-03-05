@@ -1,0 +1,22 @@
+* {
+    background-color: rgb(160, 180, 124);
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+p {
+    text-align: center;
+    font-size: 25px;
+}
+
+.title-page {
+    margin-top: 40%;
+}
+
+.start-button {
+    margin-left: 640px;
+    
+}
