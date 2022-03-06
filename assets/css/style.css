@@ -13,10 +13,11 @@ p {
 }
 
 .title-page {
-    margin-top: 40%;
+    margin-top: 20%;
+    text-align: center;
 }
 
-.start-button {
-    margin-left: 640px;
+#start-button {
+    margin-left: auto;
     
 }

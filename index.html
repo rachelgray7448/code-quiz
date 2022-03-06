@@ -8,12 +8,16 @@
     <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
-    <div class="title-page">
+    <div class="title-page" id="title-page">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the code-related questions within the time limit. Keep in mind that incorrect answers will deduct 10 seconds from your time remaining! </p>
-        <button type="button" class="start-button">Start</button>
     </div>
-    <div id="quiz"></div>
+    <button type="button" id="start-button">Start</button>
+    <div id="quiz">
+        <div id="questions"></div>
+        <div id="answers"></div>
+        <div id="timer"></div>
+    </div>
 
 
     <script src="./assets/js/script.js"></script>
