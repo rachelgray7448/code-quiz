@@ -2,9 +2,11 @@ var questionEl = document.getElementById("questions");
 var answersEl = document.getElementById("answers");
 var titleEl = document.getElementById("title-page");
 var buttonEl = document.getElementById("start-button");
-var timerEl = document.getElementbyId("timer");
+var timerEl = document.getElementById("timer");
 var score = 0;
-var time = 0;
+var time = null;
+var count = 90;
+
 
 var myQuestions = [
     {
@@ -60,29 +62,33 @@ var myQuestions = [
 ];
 
 
-var timeInterval = setInterval(function() {
+function timeInterval () {
+    timerEl.innerHTML = "<p> time left:" + count + " seconds</p>"
+    count--;
+}
 
-})
+function startTimer () {
+    time = setInterval(timeInterval, 1000);
+    if (count == 0) {
+        return
+    }
+}
 
 var currentQuestionIndex = 0;
 
 var selectedAnswer = function () {
-    console.dir(this);
-    console.log(this.textContent);
-    console.log(myQuestions[currentQuestionIndex].correctAnswer);
     if (this.textContent == myQuestions[currentQuestionIndex].correctAnswer) {
         window.alert("Correct!")
-        currentQuestionIndex++1
     }
     else {
         window.alert("Wrong!")
+        count -= 10;
     }
-    
+    nextQuestion();
 }
 
-
-
 var displayAnswers = function() {
+    answersEl.innerHTML = "";
     for (let i = 0; i < myQuestions[currentQuestionIndex].answers.length; i++) {
         var answerButton = document.createElement("button");
         answerButton.onclick = selectedAnswer;
@@ -91,11 +97,15 @@ var displayAnswers = function() {
     }
 }
 
+function nextQuestion () {
+    currentQuestionIndex++;
+    questionEl.textContent = myQuestions[currentQuestionIndex].question;
+    displayAnswers();
+}
 
 buttonEl.onclick = function() {
+    startTimer ();
     titleEl.style.display = "none";
-    buttonEl.textContent = "Next";
-    console.dir(questionEl); 
     questionEl.textContent = myQuestions[currentQuestionIndex].question;
     answersEl.textContent = "";
     displayAnswers();
