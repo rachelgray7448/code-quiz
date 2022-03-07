@@ -6,8 +6,7 @@ var timerEl = document.getElementById("timer");
 var score = 0;
 var time = null;
 var count = 90;
-
-
+var currentQuestionIndex = 0;
 var myQuestions = [
     {
         question: "Commonly used data types do NOT include:",
@@ -63,18 +62,16 @@ var myQuestions = [
 
 
 function timeInterval () {
-    timerEl.innerHTML = "<p> time left:" + count + " seconds</p>"
+    timerEl.innerHTML = "<p> Time left:" + count + " seconds</p>"
     count--;
+    if (count == 0) {
+        endGame ();
+    }
 }
 
 function startTimer () {
     time = setInterval(timeInterval, 1000);
-    if (count == 0) {
-        return
-    }
 }
-
-var currentQuestionIndex = 0;
 
 var selectedAnswer = function () {
     if (this.textContent == myQuestions[currentQuestionIndex].correctAnswer) {
@@ -98,9 +95,21 @@ var displayAnswers = function() {
 }
 
 function nextQuestion () {
-    currentQuestionIndex++;
-    questionEl.textContent = myQuestions[currentQuestionIndex].question;
-    displayAnswers();
+    currentQuestionIndex++; 
+    if (currentQuestionIndex >= myQuestions.length) {
+        endGame();
+    }
+    else {
+        questionEl.textContent = myQuestions[currentQuestionIndex].question;
+        displayAnswers();
+    }
+}
+
+function endGame () {
+    window.prompt("Game Over! Enter your initials to save your score!");
+    score = count;
+    localStorage.setItem("score", score);
+
 }
 
 buttonEl.onclick = function() {
